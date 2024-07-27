@@ -10,7 +10,9 @@
   },
   "main": "app.ts",
   "scripts": {
-    "start": "npx tsc && node dist/app.js"
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "dev": "npx tsc && node dist/app.js"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
