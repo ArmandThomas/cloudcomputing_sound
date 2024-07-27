@@ -17,7 +17,6 @@ connectDB(process.env.MONGODB_URI);
 
 const app = express();
 
-
 app.use(bodyParser.json());
 
 const PORT = process.env.PORT;
