@@ -9,10 +9,10 @@ router.use(authMiddleware);
 
 router.post("/", async (request, response) => {
 
-    const { data, prediction, device } = request.body;
+    const { data, prediction, device, date } = request.body;
 
     try {
-        const predictionCreated = await Prediction.create({ data, prediction, device });
+        const predictionCreated = await Prediction.create({ data, prediction, device, date });
         return response.status(200).send({ predictionCreated });
     }
     catch (e) {

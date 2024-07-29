@@ -5,6 +5,7 @@ export type TPrediction = {
     data : number[];
     prediction: string;
     device : IDevice;
+    date : Date;
 }
 
 export interface IPrediction extends TPrediction, Document {}
@@ -21,6 +22,10 @@ const predictionSchema: Schema = new Schema({
     device: {
         type: Schema.Types.ObjectId,
         ref: "Device",
+    },
+    date: {
+        type: Date,
+        default: Date.now,
     },
 });
 
