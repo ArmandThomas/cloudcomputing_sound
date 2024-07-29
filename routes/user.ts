@@ -9,10 +9,40 @@ import { UserData, TUserResponse } from "../types/user";
 import * as process from "process";
 import User from "../models/User";
 import {getJwtSecret} from "../utils/jsonwebtoken";
+import {authMiddleware} from "../middlewares/auth";
 
 const router = express.Router();
 
 const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+router.post('/save_notification_token', authMiddleware,async (request, response) => {
+
+    const userId = request.user._id;
+    const { token } = request.body;
+
+    try {
+        // @ts-ignore
+        await User.findByIdAndUpdate(userId, {notification_token: token}, {});
+    }
+    catch (e) {
+        return response.status(500).send({ message: "Internal server error" });
+    }
+
+});
+
+router.get('/me', authMiddleware, async (request, response) => {
+
+        const userId = request.user._id;
+
+        try {
+            // @ts-ignore
+            const user = await User.findById(userId) as TUserResponse;
+            return response.status(200).send(user);
+        }
+        catch (e) {
+            return response.status(500).send({ message: "Internal server error" });
+        }
+});
 
 router.post('/register', async (request: { body : UserData }, response: Response) => {
 
