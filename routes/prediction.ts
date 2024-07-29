@@ -7,9 +7,7 @@ import wavEncoder from 'wav-encoder';
 
 const router = express.Router();
 
-router.use(authMiddleware);
-
-router.post("/", async (request, response) => {
+router.post("/", authMiddleware, async (request, response) => {
 
     const { data, prediction, device, date } = request.body;
 
