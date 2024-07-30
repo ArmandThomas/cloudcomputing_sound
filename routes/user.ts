@@ -7,7 +7,7 @@ dotenv.config();
 
 import { UserData, TUserResponse } from "../types/user";
 import * as process from "process";
-import User from "../models/User";
+import User, {TUser} from "../models/User";
 import {getJwtSecret} from "../utils/jsonwebtoken";
 import {authMiddleware} from "../middlewares/auth";
 
@@ -21,7 +21,12 @@ router.post('/save_notification_token', authMiddleware,async (request, response)
     const { token } = request.body;
 
     try {
-        await User.findByIdAndUpdate(userId, { notification_token: token });
+        const userToken = await User.findById(userId) as TUser;
+        if (!userToken) {
+            return response.status(404).send({ message: "User not found" });
+        }
+        const newUserToken = [...userToken.pushToken, token];
+        await User.findByIdAndUpdate(userId, { pushToken: newUserToken });
         return response.status(200).send({ message: "Token saved" });
     }
     catch (e) {
