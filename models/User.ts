@@ -4,6 +4,7 @@ export type TUser = {
     email: string;
     password: string;
     avatar: string;
+    pushToken: string[];
 };
 
 export interface IUser extends TUser, Document {}
@@ -24,6 +25,9 @@ const userSchema: Schema = new Schema({
     date: {
         type: Date,
         default: Date.now,
+    },
+    pushToken: {
+        type: [String],
     },
 });
 

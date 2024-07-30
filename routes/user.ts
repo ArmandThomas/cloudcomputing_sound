@@ -21,8 +21,8 @@ router.post('/save_notification_token', authMiddleware,async (request, response)
     const { token } = request.body;
 
     try {
-        // @ts-ignore
-        await User.findByIdAndUpdate(userId, {notification_token: token}, {});
+        await User.findByIdAndUpdate(userId, { notification_token: token });
+        return response.status(200).send({ message: "Token saved" });
     }
     catch (e) {
         return response.status(500).send({ message: "Internal server error" });
