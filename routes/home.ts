@@ -24,10 +24,10 @@ router.get("/", async (request, response) => {
 
 router.post("/", async (request, response) => {
 
-        const { name, address } = request.body;
+        const { name } = request.body;
 
         try {
-            const homeCreated = await Home.create({ name, address, users: [request.user._id] });
+            const homeCreated = await Home.create({ name, users: [request.user._id] });
             return response.status(200).send({ homeCreated });
         }
         catch (e) {

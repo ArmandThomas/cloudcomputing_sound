@@ -4,7 +4,6 @@ import { IUser } from './User';
 
 export type THome = {
     name: string;
-    location: string;
     devices: IDevice[];
     users: IUser[];
 }
@@ -14,10 +13,6 @@ const homeSchema: Schema = new Schema({
     name: {
         type: String,
         required: true,
-    },
-    location: {
-        type: String,
-        required: false,
     },
     devices: [{
         type: Schema.Types.ObjectId,

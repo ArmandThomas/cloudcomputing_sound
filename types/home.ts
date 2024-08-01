@@ -6,5 +6,4 @@ export interface PopulatedHome {
     name: string;
     devices: DeviceWithPrediction[];
     users: TUserResponse[];
-    location: string;
 }
