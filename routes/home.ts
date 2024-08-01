@@ -1,7 +1,7 @@
 import express from "express";
 import {authMiddleware} from "../middlewares/auth";
 
-import Home, {IHome, THome} from "../models/Home";
+import Home, {THome} from "../models/Home";
 import Prediction, {IPrediction} from "../models/Prediction";
 import {PopulatedHome} from "../types/home";
 

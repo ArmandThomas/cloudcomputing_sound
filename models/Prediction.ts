@@ -2,7 +2,6 @@ import { Document, model, Schema } from "mongoose";
 import {IDevice} from "./Device";
 
 export type TPrediction = {
-    data : number[];
     prediction: string;
     device : IDevice;
     date : Date;
@@ -11,10 +10,6 @@ export type TPrediction = {
 export interface IPrediction extends TPrediction, Document {}
 
 const predictionSchema: Schema = new Schema({
-    data: {
-        type: [Number],
-        required: true,
-    },
     prediction: {
         type: String,
         required: true,
