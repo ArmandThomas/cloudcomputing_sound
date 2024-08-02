@@ -11,7 +11,13 @@ export const authMiddleware = async (request: Request, response: Response, next:
     const token = authHeader.split(' ')[1];
 
     try {
-        const user = await getUserFromJwt(token);
+        let user;
+        try {
+            user = await getUserFromJwt(token);
+        } catch (e) {
+            return response.status(401).json({ message: 'Unauthorized' });
+        }
+
         if (!user) {
             return response.status(401).json({ message: 'Unauthorized' });
         }
